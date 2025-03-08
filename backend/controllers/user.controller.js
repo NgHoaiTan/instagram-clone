@@ -1,9 +1,9 @@
-import { User, User } from '../models/user.model';
+import { User } from '../models/user.model.js';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import 'dotenv/config';
-import getDataUri from '../config/datauri';
-import cloudinary from '../config/cloudinary';
+import getDataUri from '../config/datauri.js';
+import cloudinary from '../config/cloudinary.js';
 
 export const register = async (req, res) => {
     try {
