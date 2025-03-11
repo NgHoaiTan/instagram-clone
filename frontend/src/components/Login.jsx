@@ -4,11 +4,10 @@ import { Input } from "./ui/input";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import { Loader2 } from "lucide-react";
-const SignUp = () => {
+import { useNavigate } from "react-router-dom";
+const Login = () => {
   const [input, setInput] = useState({
-    username: "",
     email: "",
     password: "",
   });
@@ -26,7 +25,7 @@ const SignUp = () => {
     try {
       setLoading(true);
       const res = await axios.post(
-        "http://localhost:3000/api/v1/user/register",
+        "http://localhost:3000/api/v1/user/login",
         input,
         {
           headers: {
@@ -36,10 +35,9 @@ const SignUp = () => {
         }
       );
       if (res.data.success) {
-        navigate("/login");
+        navigate("/");
         toast.success(res.data.message);
         setInput({
-          username: "",
           email: "",
           password: "",
         });
@@ -60,19 +58,10 @@ const SignUp = () => {
         <div className="my-4">
           <h1 className="text-center font-bold text-xl">LOGO</h1>
           <p className="text-sm text-center">
-            Signup to see photos & videos from your friends
+            Login to see photos & videos from your friends
           </p>
         </div>
-        <div>
-          <span className="py-2 font-medium">Username</span>
-          <Input
-            type="text"
-            name="username"
-            value={input.username}
-            onChange={changeEventHandler}
-            className="focus-visible:ring-transparent my-2"
-          />
-        </div>
+
         <div>
           <span className="py-2 font-medium">Email</span>
           <Input
@@ -99,13 +88,12 @@ const SignUp = () => {
             Please wait...
           </Button>
         ) : (
-          <Button type="submit">Sign Up</Button>
+          <Button type="submit">Login</Button>
         )}
-
         <span className="text-center">
-          Already have an account?{" "}
-          <Link to="/login" className="text-blue-600">
-            Login
+          {"Doesn't have an account?"}
+          <Link to="/signup" className="text-blue-600">
+            Register
           </Link>
         </span>
       </form>
@@ -113,4 +101,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Login;
